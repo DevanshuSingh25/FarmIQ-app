@@ -49,27 +49,29 @@ export function FarmIQNavbar({ theme, language, onThemeToggle, onLanguageChange 
   const { logout, user } = useAuth();
   const [currentLanguage, setCurrentLanguage] = useState<'English' | 'Hindi' | 'Punjabi'>(language);
 
-  const navLinks = [
-    { label: 'Soil', href: '/soil-analysis' },
-    { label: 'Crop', href: '/farmer/crop-disease' },
-    { label: 'Market', href: '/market-prices' },
-    { label: 'IoT', href: '/farmer/iot' },
-    { label: 'Forum', href: '/farmer/forum' },
-    { label: 'Consultancy', href: '/farmer/consultancy' },
-    { label: 'EdgeAI', href: 'https://translationchatbotfinal.onrender.com/', external: true },
-  ];
+  // Role-based navigation links (shown in navbar on desktop)
+  // Both vendor and farmer have no navbar links for a cleaner UI
+  const navLinks: { label: string; href: string; external: boolean }[] = [];
 
-  const menuItems = [
-    { label: "Dashboard", icon: Home, to: "/farmer/dashboard" },
-    { label: "Soil analysis", icon: FlaskConical, to: "/soil-analysis" },
-    { label: "Crop disease", icon: Bug, to: "/farmer/crop-disease" },
-    { label: "Weather", icon: CloudRain, to: "/farmer/weather" },
-    { label: "Market data", icon: TrendingUp, to: "/market-prices" },
-    { label: "IoT Sensor", icon: Cpu, to: "/farmer/iot" },
-    { label: "Forum", icon: MessageSquare, to: "/farmer/forum" },
-    { label: "Consultancy", icon: UserCircle, to: "/farmer/consultancy" },
-    { label: "EdgeAI", icon: Brain, to: "https://translationchatbotfinal.onrender.com/", external: true }
-  ];
+  // Role-based burger menu items
+  const menuItems = user?.role === 'vendor'
+    ? [ // Vendor burger menu
+      { label: "Dashboard", icon: Home, to: "/vendor/dashboard" },
+      { label: "QR Scan", icon: QrCode, to: "/vendor/qr-scan" },
+      { label: "Market Prices", icon: TrendingUp, to: "/vendor/market-prices" },
+      { label: "Farmer Search", icon: User, to: "/vendor/farmer-search" },
+    ]
+    : [ // Farmer burger menu
+      { label: "Dashboard", icon: Home, to: "/farmer/dashboard" },
+      { label: "Soil analysis", icon: FlaskConical, to: "/soil-analysis" },
+      { label: "Crop disease", icon: Bug, to: "/farmer/crop-disease" },
+      { label: "Weather", icon: CloudRain, to: "/farmer/weather" },
+      { label: "Market data", icon: TrendingUp, to: "/market-prices" },
+      { label: "IoT Sensor", icon: Cpu, to: "/farmer/iot" },
+      { label: "Forum", icon: MessageSquare, to: "/farmer/forum" },
+      { label: "Consultancy", icon: UserCircle, to: "/farmer/consultancy" },
+      { label: "EdgeAI", icon: Brain, to: "https://translationchatbotfinal.onrender.com/", external: true }
+    ];
 
   const languages = ['English', 'Hindi', 'Punjabi'] as const;
 
@@ -132,11 +134,7 @@ export function FarmIQNavbar({ theme, language, onThemeToggle, onLanguageChange 
                 onClick={() => navigate(`/${user?.role || 'farmer'}/dashboard`)}
                 className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors cursor-pointer"
               >
-                FarmIQ <span className="text-lg font-normal text-muted-foreground ml-3">
-                  {user?.role === 'farmer' ? 'Farmer' :
-                    user?.role === 'vendor' ? 'Vendor' :
-                      user?.role === 'admin' ? 'Admin' : 'User'} dashboard
-                </span>
+                FarmIQ
               </button>
             </div>
           </div>
@@ -206,13 +204,23 @@ export function FarmIQNavbar({ theme, language, onThemeToggle, onLanguageChange 
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-popover border border-border shadow-medium">
-                <DropdownMenuItem
-                  className="cursor-pointer hover:bg-muted"
-                  onClick={() => navigate('/farmer/qr/generate')}
-                  role="menuitem"
-                >
-                  {getTranslation('qr.menu.generate', currentLanguage)}
-                </DropdownMenuItem>
+                {user?.role === 'vendor' ? (
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-muted"
+                    onClick={() => navigate('/vendor/qr-scan')}
+                    role="menuitem"
+                  >
+                    Scan QR
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-muted"
+                    onClick={() => navigate('/farmer/qr/generate')}
+                    role="menuitem"
+                  >
+                    {getTranslation('qr.menu.generate', currentLanguage)}
+                  </DropdownMenuItem>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
 
