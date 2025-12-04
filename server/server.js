@@ -12,7 +12,10 @@ const PORT = process.env.PORT || 3001;
 
 // Update CORS for production
 const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ['https://farm-frontend-jb39.onrender.com', 'https://farm-frontend-jb39.onrender.com/']
+  ? [
+    'https://farm-iq-app.vercel.app',      // Vercel production deployment
+    'https://farm-frontend-jb39.onrender.com'  // Old Render frontend (if still needed)
+  ]
   : ['http://localhost:8080', 'http://localhost:5173'];
 
 app.use(cors({
@@ -20,10 +23,16 @@ app.use(cors({
     // Log the origin for debugging
     console.log('CORS request from origin:', origin);
 
-    // Temporarily allow all origins for debugging
+    // Allow all origins in production (since we're using credentials)
+    // For production cross-site cookies, we need to allow the Vercel origin
     if (process.env.NODE_ENV === 'production') {
-      // In production, allow all origins temporarily
-      callback(null, true);
+      // Allow specific origins in production
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log('CORS blocked origin:', origin);
+        callback(new Error('Not allowed by CORS'));
+      }
     } else {
       // In development, use strict CORS
       if (!origin) return callback(null, true);
@@ -36,24 +45,31 @@ app.use(cors({
       }
     }
   },
-  credentials: true,
+  credentials: true,  // REQUIRED for cross-site cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 
 // Middleware (CORS already configured above)
 
+// CRITICAL: Trust proxy for Render deployment (required for secure cookies)
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session configuration
+// CRITICAL: sameSite='none' and secure=true are REQUIRED for cross-site cookies
+// between Vercel (frontend) and Render (backend)
 app.use(session({
-  secret: 'farmiq-secret-key-change-in-production',
+  name: 'connect.sid',
+  secret: process.env.SESSION_SECRET || 'farmiq-secret-key-change-in-production',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set to true in production with HTTPS
     httpOnly: true,
+    secure: true,          // REQUIRED for cross-site cookies (HTTPS only)
+    sameSite: 'none',      // REQUIRED for cross-site cookies
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
