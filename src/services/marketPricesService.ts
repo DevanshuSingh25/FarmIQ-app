@@ -1,6 +1,8 @@
 // Market Prices Service - Backend Proxy Integration
 // Calls server-side proxy at /api/market-prices which fetches from data.gov.in API
 
+import { getAPIBaseURL } from '../utils/api';
+
 export interface MarketPrice {
   state: string | null;
   district: string | null;
@@ -60,7 +62,7 @@ class MarketPricesService {
       params.append('limit', String(pageSize));
 
       // Make request to backend proxy
-      const response = await fetch(`/api/market-prices?${params.toString()}`, {
+      const response = await fetch(`${getAPIBaseURL()}/market-prices?${params.toString()}`, {
         credentials: 'include',
         headers: {
           'Accept': 'application/json'
