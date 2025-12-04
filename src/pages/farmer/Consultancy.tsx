@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Phone, MessageSquare, Star, Search, User, X, Send, PhoneOff, Award, Users } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { FarmIQNavbar } from "@/components/farmiq/FarmIQNavbar";
+import { getAPIBaseURL } from '@/utils/api';
 
 interface Expert {
     id: number;
@@ -45,7 +46,10 @@ const Consultancy = () => {
             if (searchTerm) params.append('q', searchTerm);
             if (specializationFilter && specializationFilter !== 'All') params.append('specialization', specializationFilter);
 
-            const res = await fetch(`/api/experts?${params.toString()}`);
+            const apiBaseUrl = getAPIBaseURL();
+            const res = await fetch(`${apiBaseUrl}/experts?${params.toString()}`, {
+                credentials: 'include' // Important: Include cookies for session authentication
+            });
             if (!res.ok) throw new Error('Failed to load experts');
             const json = await res.json();
             setExperts(json.data);
