@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide Google Translate banner and related UI artifacts */
+.goog-te-banner-frame { display: none !important; }
+body { top: 0px !important; }
+.goog-te-balloon-frame { display: none !important; }
+.goog-logo-link { display: none !important; }
+.goog-te-gadget { height: 0 !important; overflow: hidden !important; }
+.skiptranslate iframe { display: none !important; }
+/* Ensure our layout isn't pushed by any injected wrappers */
+html { margin-top: 0 !important; }
+
+/* Smart Crop Advisory Design System - Agricultural Theme
+All colors MUST be HSL and semantically meaningful for farming context.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - Natural cream and earth tones */
+    --background: 48 15% 97%;
+    --foreground: 120 15% 15%;
+
+    /* Card surfaces - Clean with subtle warmth */
+    --card: 0 0% 100%;
+    --card-foreground: 120 15% 15%;
+
+    /* Popover components */
+    --popover: 0 0% 100%;
+    --popover-foreground: 120 15% 15%;
+
+    /* Primary - Deep forest green (trust, growth, nature) */
+    --primary: 140 65% 25%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 140 65% 35%;
+
+    /* Secondary - Warm earth brown (stability, soil) */
+    --secondary: 30 25% 88%;
+    --secondary-foreground: 30 65% 25%;
+
+    /* Muted tones - Subtle backgrounds */
+    --muted: 48 15% 94%;
+    --muted-foreground: 120 10% 45%;
+
+    /* Accent - Vibrant crop gold (harvest, prosperity) */
+    --accent: 45 100% 60%;
+    --accent-foreground: 30 65% 15%;
+
+    /* Success - Fresh leaf green */
+    --success: 110 70% 45%;
+    --success-foreground: 0 0% 98%;
+
+    /* Warning - Sunset orange (alerts, caution) */
+    --warning: 25 95% 55%;
+    --warning-foreground: 0 0% 98%;
+
+    /* Destructive states */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders and inputs - Soft natural tones */
+    --border: 120 15% 85%;
+    --input: 120 15% 90%;
+    --ring: 140 65% 25%;
+
+    --radius: 0.75rem;
+
+    /* Design system extensions for agricultural app */
+    /* Gradients - Natural and vibrant */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(110 70% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(50 100% 70%));
+    --gradient-earth: linear-gradient(135deg, hsl(30 35% 75%), hsl(30 25% 85%));
+    
+    /* Shadows - Natural depth */
+    --shadow-soft: 0 2px 8px hsl(120 15% 15% / 0.08);
+    --shadow-medium: 0 4px 16px hsl(120 15% 15% / 0.12);
+    --shadow-strong: 0 8px 32px hsl(120 15% 15% / 0.16);
+    --shadow-glow: 0 0 24px hsl(var(--primary) / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Base colors - Dark earth tones with good contrast */
+    --background: 120 15% 8%;
+    --foreground: 48 15% 95%;
+
+    /* Card surfaces - Slightly lighter than background */
+    --card: 120 15% 10%;
+    --card-foreground: 48 15% 95%;
+
+    /* Popover components */
+    --popover: 120 15% 10%;
+    --popover-foreground: 48 15% 95%;
+
+    /* Primary - Brighter forest green for dark theme */
+    --primary: 140 65% 45%;
+    --primary-foreground: 120 15% 8%;
+    --primary-glow: 140 65% 55%;
+
+    /* Secondary - Warm dark earth brown */
+    --secondary: 30 25% 20%;
+    --secondary-foreground: 48 15% 95%;
+
+    /* Muted tones - Darker backgrounds */
+    --muted: 120 15% 15%;
+    --muted-foreground: 48 15% 70%;
+
+    /* Accent - Vibrant crop gold (adjusted for dark) */
+    --accent: 45 100% 65%;
+    --accent-foreground: 120 15% 8%;
+
+    /* Success - Fresh leaf green (brighter for dark) */
+    --success: 110 70% 55%;
+    --success-foreground: 120 15% 8%;
+
+    /* Warning - Sunset orange (adjusted for dark) */
+    --warning: 25 95% 60%;
+    --warning-foreground: 120 15% 8%;
+
+    /* Destructive states */
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 48 15% 95%;
+
+    /* Borders and inputs - Darker natural tones */
+    --border: 120 15% 25%;
+    --input: 120 15% 20%;
+    --ring: 140 65% 45%;
+
+    /* Design system extensions for dark agricultural theme */
+    /* Gradients - Darker but still vibrant */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(110 70% 65%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(50 100% 75%));
+    --gradient-earth: linear-gradient(135deg, hsl(30 35% 25%), hsl(30 25% 35%));
+    
+    /* Shadows - Darker depth */
+    --shadow-soft: 0 2px 8px hsl(120 15% 5% / 0.3);
+    --shadow-medium: 0 4px 16px hsl(120 15% 5% / 0.4);
+    --shadow-strong: 0 8px 32px hsl(120 15% 5% / 0.5);
+    --shadow-glow: 0 0 24px hsl(var(--primary) / 0.3);
+
+    --sidebar-background: 120 15% 8%;
+    --sidebar-foreground: 48 15% 95%;
+    --sidebar-primary: 140 65% 45%;
+    --sidebar-primary-foreground: 120 15% 8%;
+    --sidebar-accent: 120 15% 15%;
+    --sidebar-accent-foreground: 48 15% 95%;
+    --sidebar-border: 120 15% 25%;
+    --sidebar-ring: 140 65% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

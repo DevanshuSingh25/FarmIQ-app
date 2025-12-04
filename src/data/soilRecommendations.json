@@ -1,0 +1,98 @@
+{
+    "Black Soil": {
+        "crops": [
+            "Cotton",
+            "Maize",
+            "Wheat",
+            "Sunflower",
+            "Moong/Chickpea"
+        ],
+        "fertilizer": [
+            "Apply 1 bag DAP per acre before sowing.",
+            "Use 1–1.5 bags Urea per acre in 2 split doses during crop growth.",
+            "Add 2 tractor-trolleys gobar compost to soften soil."
+        ],
+        "tips": [
+            "Black soil cracks; maintain steady moisture.",
+            "Use mulching in cotton to reduce evaporation.",
+            "Avoid over-watering with tube-well irrigation."
+        ],
+        "irrigation": "Light, frequent irrigation for cotton/maize; stage-wise irrigation for wheat."
+    },
+    "Cinder Soil": {
+        "crops": [
+            "Kinnow",
+            "Grapes",
+            "Cotton",
+            "Sugarcane",
+            "Vegetables"
+        ],
+        "fertilizer": [
+            "Apply 1 bag DAP per acre before sowing.",
+            "Use 2–3 bags Urea in split doses.",
+            "Apply mulch or wheat straw to conserve moisture."
+        ],
+        "tips": [
+            "Soil is porous; keep soil covered.",
+            "Drip irrigation recommended for kinnow and grapes."
+        ],
+        "irrigation": "Frequent light irrigation with mulching."
+    },
+    "Laterite Soil": {
+        "crops": [
+            "Maize",
+            "Sugarcane",
+            "Mustard",
+            "Groundnut",
+            "Vegetables"
+        ],
+        "fertilizer": [
+            "Apply 1 bag DAP per acre before sowing.",
+            "Use 1 bag MOP for sugarcane/vegetables.",
+            "Add compost or green manure (sunhemp/dhaincha)."
+        ],
+        "tips": [
+            "Foothill regions—risk of erosion; use contour farming.",
+            "Add crop residues to improve soil body."
+        ],
+        "irrigation": "Regular irrigation; avoid runoff."
+    },
+    "Peat Soil": {
+        "crops": [
+            "Rice",
+            "Potato",
+            "Berseem",
+            "Oat",
+            "Vegetables"
+        ],
+        "fertilizer": [
+            "Apply 1 bag DAP per acre before sowing.",
+            "Add cow dung compost.",
+            "Mix sand to improve drainage."
+        ],
+        "tips": [
+            "Peat soil stays wet; avoid heavy irrigation.",
+            "Ideal for paddy-fodder cropping system."
+        ],
+        "irrigation": "Light irrigation only; keep moist but not water-logged except for rice."
+    },
+    "Yellow Soil": {
+        "crops": [
+            "Maize",
+            "Groundnut",
+            "Sugarcane",
+            "Vegetables",
+            "Pulses"
+        ],
+        "fertilizer": [
+            "Apply 1 bag DAP per acre before sowing.",
+            "Use 1.5–2 bags Urea during crop growth.",
+            "Add compost or green manure crops."
+        ],
+        "tips": [
+            "Add compost to improve soil life.",
+            "Grow dhaincha for 45 days before main crop."
+        ],
+        "irrigation": "Moderate irrigation; avoid over-watering to prevent soil washing."
+    }
+}

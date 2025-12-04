@@ -1,0 +1,79 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Production builds
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Model files and training notebooks
+plant_disease_recog_model_pwp.keras
+model.weights.h5
+*.keras
+*.h5
+*.pb
+*.ckpt
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Database files (if you want to exclude the SQLite DB)
+# server/farmiQ.db
+# Uncomment above if you don't want to commit the database
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Package manager lockfiles (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+# bun.lockb
+
+# IDE specific
+*.swp
+*.swo
+*~
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
