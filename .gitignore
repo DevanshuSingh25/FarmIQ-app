@@ -33,12 +33,7 @@ pnpm-debug.log*
 *.sw?
 
 # Model files and training notebooks
-plant_disease_recog_model_pwp.keras
-model.weights.h5
-*.keras
-*.h5
-*.pb
-*.ckpt
+
 
 # Python cache
 *.pyc

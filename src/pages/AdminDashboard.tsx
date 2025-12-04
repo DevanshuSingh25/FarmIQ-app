@@ -7,10 +7,10 @@ import {
   BarChart3, LogOut, Menu, X
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import ProfileManagement from './admin/ProfileManagement';
-import LabManagement from './admin/LabManagement';
-import SchemeManagement from './admin/SchemeManagement';
-import ExpertManagement from './admin/ExpertManagement';
+import ProfileManagement from './Admin/ProfileManagement';
+import LabManagement from './Admin/LabManagement';
+import SchemeManagement from './Admin/SchemeManagement';
+import ExpertManagement from './Admin/ExpertManagement';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
