@@ -2,14 +2,19 @@
  * Get the API base URL for making backend requests
  */
 export function getAPIBaseURL(): string {
-    // Check if we're in development mode (Vite dev server)
-    const isDevelopment = import.meta.env.DEV;
+    // Use VITE_API_URL from environment variables if available
+    // This allows for flexible deployment configurations
+    const apiUrl = import.meta.env.VITE_API_URL;
 
-    if (isDevelopment) {
-        // Development: use localhost backend
-        return 'http://localhost:3001/api';
-    } else {
-        // Production: use relative path (assumes frontend and backend on same domain)
-        return '/api';
+    if (apiUrl) {
+        return apiUrl;
     }
+
+    // Fallback to localhost in development
+    if (import.meta.env.DEV) {
+        return 'http://localhost:3001/api';
+    }
+
+    // Default fallback (shouldn't reach here in production if env is set correctly)
+    return '/api';
 }

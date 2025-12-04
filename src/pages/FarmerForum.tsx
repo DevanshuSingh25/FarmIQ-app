@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FarmIQNavbar } from "@/components/farmiq/FarmIQNavbar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { getAPIBaseURL } from "@/utils/api";
 import {
     Select,
     SelectContent,
@@ -82,11 +83,6 @@ export default function FarmerForum() {
     const { user } = useAuth();
     const [currentUserName, setCurrentUserName] = useState("Farmer");
 
-    // API Base URL helper
-    const getAPIBaseURL = () => {
-        return 'http://localhost:3001/api';
-    };
-
     useEffect(() => {
         fetchUserProfile();
         fetchForumPosts();
@@ -94,9 +90,7 @@ export default function FarmerForum() {
 
     const fetchUserProfile = async () => {
         try {
-            const API_BASE_URL = getAPIBaseURL();
-
-            const response = await fetch(`${API_BASE_URL}/me/profile`, {
+            const response = await fetch(`${getAPIBaseURL()}/me/profile`, {
                 credentials: 'include',
             });
             if (response.ok) {
@@ -115,10 +109,9 @@ export default function FarmerForum() {
     const fetchForumPosts = async () => {
         try {
             setIsLoading(true);
-            const API_BASE_URL = getAPIBaseURL();
 
-            console.log('Fetching from:', `${API_BASE_URL}/forum/posts`);
-            const response = await fetch(`${API_BASE_URL}/forum/posts`, {
+            console.log('Fetching from:', `${getAPIBaseURL()}/forum/posts`);
+            const response = await fetch(`${getAPIBaseURL()}/forum/posts`, {
                 credentials: 'include',
             });
 
@@ -182,10 +175,8 @@ export default function FarmerForum() {
         if (!newQuestion.trim() || !selectedCategory) return;
 
         try {
-            const API_BASE_URL = getAPIBaseURL();
-
             // Post the question to database
-            const response = await fetch(`${API_BASE_URL}/forum`, {
+            const response = await fetch(`${getAPIBaseURL()}/forum`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -262,8 +253,7 @@ export default function FarmerForum() {
 
         // Persist to database (just increment count, actual reply not stored in simple version)
         try {
-            const API_BASE_URL = getAPIBaseURL();
-            const response = await fetch(`${API_BASE_URL}/forum/reply`, {
+            const response = await fetch(`${getAPIBaseURL()}/forum/reply`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -300,8 +290,7 @@ export default function FarmerForum() {
 
         // Persist to database
         try {
-            const API_BASE_URL = getAPIBaseURL();
-            const response = await fetch(`${API_BASE_URL}/forum/upvote`, {
+            const response = await fetch(`${getAPIBaseURL()}/forum/upvote`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

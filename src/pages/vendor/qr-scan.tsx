@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { getAPIBaseURL } from '@/utils/api';
 import {
     Menu,
     Globe,
@@ -54,7 +55,7 @@ export default function VendorQRScan() {
     const handleQRTextSubmit = async (text: string) => {
         try {
             setScanning(true);
-            const response = await fetch('http://localhost:3001/api/qr/parse', {
+            const response = await fetch(`${getAPIBaseURL()}/qr/parse`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

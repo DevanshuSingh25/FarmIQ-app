@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { getAPIBaseURL } from '@/utils/api';
 import {
     Menu,
     Globe,
@@ -61,7 +62,7 @@ export default function VendorFarmerSearch() {
     useEffect(() => {
         const fetchFarmers = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/profiles', {
+                const response = await fetch(`${getAPIBaseURL()}/profiles`, {
                     credentials: 'include'
                 });
                 if (response.ok) {
