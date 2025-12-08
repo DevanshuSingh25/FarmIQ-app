@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: farmiq-ml-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn inference_server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PLANT_MODEL_URL
+        value: https://huggingface.co/Devanshu2025/SIH-ML/resolve/main/plant_disease_recog_model_pwp.keras
+      - key: SOIL_MODEL_URL
+        value: https://huggingface.co/Devanshu2025/SIH-ML/resolve/main/soil_model.keras
+      - key: HF_TOKEN
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0

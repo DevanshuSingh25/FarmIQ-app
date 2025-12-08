@@ -1,6 +1,6 @@
 // Prediction service for crop disease detection API
 
-const PREDICTION_API_URL = import.meta.env.VITE_PREDICTION_API_URL || 'http://localhost:8000';
+const PREDICTION_API_URL = import.meta.env.VITE_ML_APP || 'http://localhost:8000';
 
 export interface PredictionResponse {
   class_name: string;
@@ -18,7 +18,7 @@ export async function callInferenceApi(imageFile: File): Promise<PredictionRespo
     console.log(`[PredictionService] 🚀 Calling REAL inference API: ${PREDICTION_API_URL}/predict`);
     console.log(`[PredictionService] 📸 Image file: ${imageFile.name}, size: ${imageFile.size} bytes`);
     console.log(`[PredictionService] ⚠️ This is a REAL API call - NOT MOCK!`);
-    
+
     // Add cache-busting to ensure we get fresh predictions
     const cacheBuster = `?t=${Date.now()}`;
     const resp = await fetch(`${PREDICTION_API_URL}/predict${cacheBuster}`, {
@@ -40,7 +40,7 @@ export async function callInferenceApi(imageFile: File): Promise<PredictionRespo
     const data = await resp.json() as any;
     console.log(`[PredictionService] ✅ Received REAL prediction from model:`, data);
     console.log(`[PredictionService] 🎯 Class: ${data.class_name}, Confidence: ${(data.confidence * 100).toFixed(2)}%`);
-    
+
     // Log metadata to prove it's real
     if (data.metadata) {
       console.log(`[PredictionService] 📊 Metadata:`, data.metadata);
@@ -49,14 +49,14 @@ export async function callInferenceApi(imageFile: File): Promise<PredictionRespo
       console.log(`[PredictionService]   Source: ${data.metadata.prediction_source}`);
       console.log(`[PredictionService]   Processing time: ${data.metadata.processing_time_ms}ms`);
     }
-    
+
     // Log top 3 if available
     if (data.top_3) {
       console.log(`[PredictionService] 📊 Top 3 predictions:`, data.top_3);
     }
-    
+
     console.log(`[PredictionService] ⚠️ THIS IS REAL DATA FROM KERAS MODEL - NOT MOCK!`);
-    
+
     // Return in expected format
     return {
       class_name: data.class_name,

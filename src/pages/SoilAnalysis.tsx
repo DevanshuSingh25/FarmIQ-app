@@ -101,7 +101,8 @@ const SoilAnalysis = () => {
       const formData = new FormData();
       formData.append("file", soilImage);
 
-      const response = await fetch("http://localhost:8000/soil-predict", {
+      const API_BASE = import.meta.env.VITE_ML_APP || "http://localhost:8000";
+      const response = await fetch(`${API_BASE}/soil-predict`, {
         method: "POST",
         body: formData
       });
